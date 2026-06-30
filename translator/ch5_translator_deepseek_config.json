@@ -1,0 +1,39 @@
+{
+  "dialogue_file": "",
+  "poll_interval_ms": 120,
+  "provider": "google_free",
+  "deepseek": {
+    "base_url": "https://api.deepseek.com/chat/completions",
+    "api_key": "",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "model": "deepseek-v4-flash"
+  },
+  "google": {
+    "base_url": "https://translation.googleapis.com/language/translate/v2",
+    "api_key": "",
+    "api_key_env": "GOOGLE_TRANSLATE_API_KEY",
+    "target": "zh-CN",
+    "source": "en",
+    "model": "nmt"
+  },
+  "google_free": {
+    "base_url": "https://translate.googleapis.com/translate_a/single",
+    "target": "zh-CN",
+    "source": "en",
+    "client": "gtx"
+  },
+  "microsoft": {
+    "endpoint": "https://api.cognitive.microsofttranslator.com/translate",
+    "api_key": "",
+    "api_key_env": "MICROSOFT_TRANSLATOR_KEY",
+    "region": "",
+    "target": "zh-Hans",
+    "source": "en"
+  },
+  "bing_free": {
+    "auth_url": "https://edge.microsoft.com/translate/auth",
+    "endpoint": "https://api.cognitive.microsofttranslator.com/translate",
+    "target": "zh-Hans",
+    "source": "en"
+  }
+}

@@ -1,0 +1,9 @@
+*.zip
+*.win
+data.win
+*.sqlite3
+*.log
+__pycache__/
+tools/
+outputs/
+*.codex-*
