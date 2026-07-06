@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$GameDir = ""
 )
 
@@ -27,7 +27,7 @@ function Find-DeltaruneDir {
         }
     }
 
-    throw "找不到 DELTARUNE 目录。请用参数指定，例如：.\install_ch5_patch.ps1 -GameDir 'D:\SteamLibrary\steamapps\common\DELTARUNE'"
+    throw "Could not find DELTARUNE. Run: powershell -ExecutionPolicy Bypass -File .\install_ch5_patch.ps1 -GameDir 'D:\SteamLibrary\steamapps\common\DELTARUNE'"
 }
 
 $gameRoot = Find-DeltaruneDir
@@ -38,27 +38,27 @@ $out = Join-Path $env:TEMP ("deltarune_ch5_translator_patched_" + [Guid]::NewGui
 $backup = $dataWin + ".ch5-live-translator-backup-" + (Get-Date -Format "yyyyMMdd-HHmmss")
 
 if (-not (Test-Path -LiteralPath $tool)) {
-    throw "缺少 UTMT CLI：$tool"
+    throw "Missing UTMT CLI: $tool"
 }
 if (-not (Test-Path -LiteralPath $script)) {
-    throw "缺少补丁脚本：$script"
+    throw "Missing patch script: $script"
 }
 
 Write-Host "DELTARUNE: $gameRoot"
-Write-Host "备份 data.win 到：$backup"
+Write-Host "Backing up data.win to: $backup"
 Copy-Item -LiteralPath $dataWin -Destination $backup -Force
 
-Write-Host "正在生成已 patch 的 data.win..."
+Write-Host "Generating patched data.win..."
 & $tool load $dataWin -s $script -o $out
 if ($LASTEXITCODE -ne 0) {
-    throw "UTMT CLI patch 失败，已保留原文件和备份。"
+    throw "UTMT CLI patch failed. Original file and backup were kept."
 }
 
-Write-Host "正在安装补丁..."
+Write-Host "Installing patched data.win..."
 Copy-Item -LiteralPath $out -Destination $dataWin -Force
 Remove-Item -LiteralPath $out -Force -ErrorAction SilentlyContinue
 
 Write-Host ""
-Write-Host "安装完成。请完全关闭并重新启动 DELTARUNE 第五章。"
-Write-Host "如需还原，把备份文件复制回 data.win 即可："
+Write-Host "Install complete. Fully close and restart DELTARUNE Chapter 5."
+Write-Host "To restore, copy this backup back to data.win:"
 Write-Host $backup
